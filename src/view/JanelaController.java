@@ -1,11 +1,17 @@
 package view;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class JanelaController {
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import view.util.Restricoes;
+
+public class JanelaController implements Initializable{
+	
 	
 	@FXML
 	private Button btN1;
@@ -58,8 +64,12 @@ public class JanelaController {
 	@FXML
 	private TextField txtVisor;
 	
+	@FXML 
+	private Label txtDetalhe;
+	
 	Double n1=0.0 , n2=0.0;
 	String o = "";
+	
 	
 	@FXML
 	public void onClick01(){
@@ -125,6 +135,7 @@ public class JanelaController {
 	@FXML
 	public void onClickSoma() {
 		n1 = Double.parseDouble(txtVisor.getText());
+		txtDetalhe.setText(txtVisor.getText() + " + ");
 		txtVisor.clear();
 		o="s";
 		
@@ -133,6 +144,7 @@ public class JanelaController {
 	@FXML
 	public void onClickSub() {
 		n1 = Double.parseDouble(txtVisor.getText());
+		txtDetalhe.setText(txtVisor.getText() + " - ");
 		txtVisor.clear();
 		o = "sub";
 	}
@@ -140,6 +152,7 @@ public class JanelaController {
 	@FXML
 	public void onClickMulti() {
 		n1 = Double.parseDouble(txtVisor.getText());
+		txtDetalhe.setText(txtVisor.getText() + " * ");
 		txtVisor.clear();
 		o = "m";
 	}
@@ -147,6 +160,7 @@ public class JanelaController {
 	@FXML
 	public void onClickDiv() {
 		n1 = Double.parseDouble(txtVisor.getText());
+		txtDetalhe.setText(txtVisor.getText() + " / ");
 		txtVisor.clear();
 		o = "d";
 	}
@@ -156,18 +170,24 @@ public class JanelaController {
 		Double result = 0.0;
 		
 		if(o == "s") {
+			txtDetalhe.setText(txtDetalhe.getText() + txtVisor.getText() + " = ");
 			result = n1 + n2;
-			txtVisor.setText(result.toString());
+			Integer i = result.intValue();
+			txtVisor.setText(i.toString());
 		}
 		if(o == "sub") {
+			txtDetalhe.setText(txtDetalhe.getText() + txtVisor.getText() + " = ");
 			result = n1 - n2;
-			txtVisor.setText(result.toString());
+			Integer i = result.intValue();
+			txtVisor.setText(i.toString());
 		}
 		if(o == "m") {
+			txtDetalhe.setText(txtDetalhe.getText() + txtVisor.getText() + " = ");
 			result = n1 * n2;
 			txtVisor.setText(result.toString());
 		}
 		if(o == "d") {
+			txtDetalhe.setText(txtDetalhe.getText() + txtVisor.getText() + " = ");
 			result = n1 / n2;
 			txtVisor.setText(result.toString());
 		}
@@ -179,6 +199,13 @@ public class JanelaController {
 		txtVisor.clear();
 		n1 = 0.0;
 		n2 = 0.0;
+		txtDetalhe.setText("");
+		
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		Restricoes.setTextFieldDouble(txtVisor);
 		
 	}
 	
